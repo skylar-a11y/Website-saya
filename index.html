@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Skylar Project</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            color: white;
+            background: #000;
+            overflow: hidden;
+            height: 100vh;
+        }
+
+        .menu {
+            display: flex;
+            justify-content: space-around;
+            padding: 20px;
+            background: rgba(0, 0, 0, 0.7);
+            position: fixed;
+            top: 0;
+            width: 100%;
+        }
+
+        .menu-item {
+            cursor: pointer;
+        }
+
+        .content {
+            padding-top: 80px;
+            text-align: center;
+        }
+
+        .home, .profile, .settings, .search {
+            display: none;
+        }
+
+        footer {
+            position: fixed;
+            bottom: 10px;
+            left: 50%;
+            transform: translateX(-50%);
+            font-size: 12px;
+        }
+
+        .profile-menu {
+            display: none;
+            position: absolute;
+            background-color: #333;
+            padding: 10px;
+            border-radius: 5px;
+            right: 10px;
+        }
+
+        .dot-menu {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+        }
+
+        .aurora {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: url('https://www.transparenttextures.com/patterns/aurora.png') repeat;
+            animation: aurora 10s infinite linear;
+        }
+
+        @keyframes aurora {
+            0% {background-position: 0 0;}
+            100% {background-position: 100% 100%;}
+        }
+
+        /* Efek gulir untuk latar belakang */
+        .scrolling-background {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: url('https://www.transparenttextures.com/patterns/aurora.png') repeat;
+            animation: scroll 10s linear infinite;
+        }
+
+        @keyframes scroll {
+            0% {background-position: 0 0;}
+            100% {background-position: 100% 100%;}
+        }
+
+        /* Efek mengetik */
+        .typing-effect {
+            display: inline-block;
+            white-space: nowrap;
+            overflow: hidden;
+            border-right: 3px solid #fff;
+            animation: typing 4s steps(40) 1s 1 normal both, blinkCaret 0.75s step-end infinite;
+        }
+
+        @keyframes typing {
+            from { width: 0; }
+            to { width: 100%; }
+        }
+
+        @keyframes blinkCaret {
+            50% { border-color: transparent; }
+        }
+
+        /* Efek gulir untuk teks */
+        .scrolling-text {
+            display: inline-block;
+            white-space: nowrap;
+            animation: scrollText 10s linear infinite;
+            font-size: 24px;
+            color: gold;
+        }
+
+        @keyframes scrollText {
+            0% { transform: translateX(100%); }
+            100% { transform: translateX(-100%); }
+        }
+    </style>
+</head>
+<body>
+    <div class="scrolling-background"></div>
+
+    <div class="menu">
+        <div class="menu-item" onclick="navigateTo('home')">Beranda</div>
+        <div class="menu-item" onclick="navigateTo('profile')">Profil</div>
+        <div class="menu-item" onclick="navigateTo('settings')">Pengaturan</div>
+        <div class="menu-item" onclick="navigateTo('search')">Cari Blog</div>
+    </div>
+    
+    <div class="content" id="content">
+        <div class="home" id="home">
+            <h1 class="typing-effect">Selamat datang di Skylar Project</h1>
+            <div class="scrolling-text">Ini adalah teks yang bergerak dari kanan ke kiri, seperti guliran.</div>
+        </div>
+        <div class="profile" id="profile">
+            <h1>Profil</h1>
+            <p>Nama: Elisa</p>
+            <p>Usia: 17</p>
+        </div>
+        <div class="settings" id="settings">
+            <h1>Pengaturan</h1>
+            <p>Ubah preferensi Anda di sini.</p>
+        </div>
+        <div class="search" id="search">
+            <h1>Cari Blog</h1>
+            <input type="text" placeholder="Cari blog...">
+        </div>
+    </div>
+    
+    <div class="footer">
+        <div class="dot-menu">
+            <button onclick="toggleProfileMenu()">...</button>
+            <div id="profileMenu" class="profile-menu">
+                <p>Profil</p>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Fungsi untuk navigasi antar halaman
+        function navigateTo(page) {
+            const pages = document.querySelectorAll('.home, .profile, .settings, .search');
+            pages.forEach(pageElement => pageElement.style.display = 'none');
+            
+            document.getElementById(page).style.display = 'block';
+        }
+
+        // Fungsi untuk menampilkan menu profil
+        function toggleProfileMenu() {
+            const menu = document.getElementById('profileMenu');
+            menu.style.display = menu.style.display === 'block' ? 'none' : 'block';
+        }
+
+        // Inisialisasi halaman pertama yang ditampilkan
+        document.addEventListener('DOMContentLoaded', () => {
+            navigateTo('home');
+        });
+    </script>
+</body>
+</html>
